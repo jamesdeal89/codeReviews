@@ -16,10 +16,8 @@ def f(size):
     spaces = size-1
     length = 1
     for x in range(size):
-        for y in range(spaces):
-            print(" ", end="")
-        for z in range(length):
-            print("#", end="")
+        print(" "*spaces, end="")
+        print("#"*length, end="")
         spaces -= 1
         length += 2
         print()
