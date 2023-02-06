@@ -58,6 +58,10 @@ class dog(Canine):
         super.__init__()
         self.name = name
 
+    def bark(self):
+        # polymorphism 
+        print(f"{self.name}: bark")
+
 # making and instance of a class
 # one class can have many instances, each with different attribute values
 bobby = Dog("Bobby")
