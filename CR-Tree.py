@@ -12,14 +12,12 @@ f(7)
 #############
 """
 
-def f(size):
-    spaces = size-1
-    length = 1
-    for x in range(size):
-        print(" "*spaces, end="")
-        print("#"*length, end="")
-        spaces -= 1
-        length += 2
-        print()
 
+def f(size):
+    for x in range(size):
+        print(" "*(size-x), end="")
+        print("#"*(2*x+1), end="")
+        print()
 f(7)
+
+
