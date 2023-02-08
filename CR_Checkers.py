@@ -22,6 +22,7 @@ _ W _ W _ W _ W
 W _ W _ W _ W _
 _ W _ W _ W _ W
 """
+import sys
 
 def printBoard(board):
     for row in board:
