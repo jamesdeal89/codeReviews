@@ -30,8 +30,6 @@ class Rules():
             self.inputStr += str(random.randint(0,1))
 
     def applyRules(self):
-        # apply the rules to the input list provided
-        print(self.inputStr)
         # list to hold each line after evaluation
         self.allList = []
         for _ in range(self.height):
@@ -60,7 +58,7 @@ class Rules():
             print()
 
 rules = Rules()
-rules.inputRules("00000011010001111001101011001111")
+rules.inputRules("11111100101110010110010100110000")
 rules.randomInputs()
 rules.applyRules()
 rules.displayOut()
