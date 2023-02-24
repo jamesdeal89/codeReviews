@@ -23,48 +23,42 @@ class Rules():
             index += 4
 
     def randomInputs(self):
-        # generate a list of random inputs which are width in length and repeat for height times
-        # always leads with a zero for first line if there would be an overflow when divided in trios
-        self.inputStr = []
-        for _ in range(self.height):
-            line = ""
-            # create leading 0 if cannot be put into trios
-            if self.width % 3:
-                line += "0"
-            for _ in range(self.width):
-                # generate a series of random 0 or 1s as per the width
-                line += str(random.randint(0,1))
-            # create following 0 if cannot be put into trios
-            if self.width % 3:
-                line += "0"
-            self.inputStr.append(line)
-
+        # string to hold the current input
+        self.inputStr = ""
+        for _ in range(self.width):
+            # generate a series of random 0 or 1s as per the width
+            self.inputStr += str(random.randint(0,1))
 
     def applyRules(self):
-        # apply the rules to the input list provided
-        self.line = ""
-        # I made the input list into one large str to make it simpler to account for overflow values
-        self.inputStr = "".join(self.inputStr)
-        index = 0
-        # loop and apply the rules to each trio
-        while index <= len(self.inputStr)-3:
-            # apply rule using dictionary, and add it to our output str
-            self.line += str(self.ruleSet[self.inputStr[index:index+3]])
-            # move the index to the next trio
-            index += 3
+        # list to hold each line after evaluation
+        self.allList = []
+        for _ in range(self.height):
+            self.line = ""
+            index = 0
+            # loop and apply the rules to each trio
+            while index <= len(self.inputStr)-3:
+                # apply rule using dictionary, and add it to our output str
+                self.line += str(self.ruleSet[self.inputStr[index:index+3]])
+                # move the index to the next trio by shifting one value over
+                index += 1
+            # add the result to our overall list
+            self.allList.append(self.line)
+            # change the input string to be the result with a leading and following 0
+            self.inputStr = "0" + self.line + "0"
 
     def displayOut(self):
-        for index in range(0,len(self.line)):
-            if self.line[index] == "0":
-                print(" ",end="")
-            elif self.line[index] == "1":
-                print("█",end="")
-            # seperate into lines of width wide divided by three as this is after applying rules
-            if index % (self.width//3)==0:
-                print()
+        # for each character in each line print the values nicely
+        for line in self.allList:
+            for char in line:
+                if char == "0":
+                    print(" ",end="")
+                elif char == "1":
+                    print("█",end="")
+            # make a new line for each new string
+            print()
 
 rules = Rules()
-rules.inputRules("11101101101010010110010100110000")
+rules.inputRules("11111100101110010110010100110000")
 rules.randomInputs()
 rules.applyRules()
 rules.displayOut()
