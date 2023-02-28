@@ -1,5 +1,5 @@
 """
-This coding challenge was later revealed to be an implementation of 'cellular automation'. https://en.wikipedia.org//wiki/Cellular_automaton
+This coding challenge was later revealed to be an implementation of 'cellular automaton'. https://en.wikipedia.org//wiki/Cellular_automaton
 Given a set of rules, return a boolean value based on three inputs.
 For example:
 if a rule 100|1 is set, return 1 if 1,0,0 is input. 
