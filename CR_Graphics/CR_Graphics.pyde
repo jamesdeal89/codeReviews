@@ -4,11 +4,10 @@ import random
 def setup():
     global traceLoc, backClr, ps, particleSystem, fireballs, fire, spark
     size(720, 480)
-    strokeWeight(8)
+    strokeWeight(3)
     traceLoc = []
     backClr = (255,0,0)
     particleSystem = ParticleSystem([3,3],200)
-    strokeWeight(2)
     imageMode(CENTER)
     fire = loadImage("fire.png")
     fire.resize(50,50)
