@@ -2,12 +2,18 @@ import random
 
 
 def setup():
-    global traceLoc, backClr, ps, particleSystem, fireballs
+    global traceLoc, backClr, ps, particleSystem, fireballs, fire, spark
     size(720, 480)
     strokeWeight(8)
     traceLoc = []
     backClr = (255,0,0)
     particleSystem = ParticleSystem([3,3],200)
+    strokeWeight(2)
+    imageMode(CENTER)
+    fire = loadImage("fire.png")
+    fire.resize(50,50)
+    spark = loadImage("spark.png")
+    spark.resize(30,30)
     fireballs = []
 
 def draw():
@@ -71,6 +77,7 @@ def mouseReleased():
 
 
 class Fireball():
+    global fire
     def __init__(self,velocityX,velocityY,originX,originY):
         self._originX = originX
         self._originY = originY
@@ -79,7 +86,8 @@ class Fireball():
         
     def drawBall(self):
         print("drawing balls")
-        ellipse(self._originX,self._originY,50,50)
+        #ellipse(self._originX,self._originY,50,50)
+        image(fire,self._originX,self._originY)
         self.updateBall()
             
     def updateBall(self):
@@ -90,6 +98,7 @@ class Fireball():
         
 class Particle():
     # a particle is a small shape which has a randomised velocity and can have physics applied to it
+    global spark
     def __init__(self,dimensions,colour,originX,originY):
         self._dimensions = dimensions 
         self._colour = colour
@@ -105,8 +114,8 @@ class Particle():
         # elipse(x,y,width,height)
         print("drawing particle")
         print(self._originX,self._originY,self._dimensions[0],self._dimensions[1])
-        ellipse(self._originX,self._originY,self._dimensions[0],self._dimensions[1]) 
-    
+        #ellipse(self._originX,self._originY,self._dimensions[0],self._dimensions[1]) 
+        image(spark,self._originX,self._originY)
     def updateParticle(self):
         # update the position of the particle
         print("updating particle")
