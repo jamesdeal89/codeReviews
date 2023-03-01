@@ -31,7 +31,6 @@ def draw():
         line(loc[0],loc[1],loc[2],loc[3])
     line(mouseX, mouseY, pmouseX, pmouseY)
     traceLoc.append([mouseX,mouseY,pmouseX,pmouseY])
-    particleSystem.addParticle(mouseX,mouseY)
     particleSystem.drawSystem()
 
     
@@ -47,6 +46,8 @@ def mouseClicked():
     elif mouseButton == LEFT:
         # make explosion
         print("left mouse clicked")
+        particleSystem.addParticle(mouseX,mouseY)
+
         
         
 class Particle():
