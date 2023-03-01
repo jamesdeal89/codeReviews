@@ -2,21 +2,18 @@ import random
 
 
 def setup():
-    global traceLoc, backClr, ps, particleSystem
+    global traceLoc, backClr, ps, particleSystem, fireballs
     size(720, 480)
     strokeWeight(8)
     traceLoc = []
     backClr = (255,0,0)
-    sprite = loadImage("data/sprite.png")
     particleSystem = ParticleSystem([3,3],200)
+    fireballs = []
 
 def draw():
-    global traceLoc, backClr, ps, particleSystem
+    global traceLoc, backClr, ps, particleSystem, fireballs
     # set frame rate to 12 fps
     frameRate(30)
-    # caclulates velocity
-    # pmouse holds the mouse position from the previous frame
-    velocity = pmouseX - mouseX
     # calling background clears the previously drawn objects
     # frameCount holds the number of total frames rendered, we can use this to track our time passed
     background(backClr[0],backClr[1],backClr[2])
@@ -32,6 +29,10 @@ def draw():
     line(mouseX, mouseY, pmouseX, pmouseY)
     traceLoc.append([mouseX,mouseY,pmouseX,pmouseY])
     particleSystem.drawSystem()
+    print("updating")
+    if len(fireballs) > 0:
+        for fireball in fireballs:
+            fireball.drawBall()
 
     
     
@@ -46,9 +47,46 @@ def mouseClicked():
     elif mouseButton == LEFT:
         # make explosion
         print("left mouse clicked")
-        particleSystem.addParticle(mouseX,mouseY)
+        for _ in range(30):
+            particleSystem.addParticle(mouseX,mouseY)
+
+def mouseDragged():
+    global fireballs, fireball
+    # when the mouse is pressed down and moved
+    # create a 'fireball' in the direction of the drag, adjust for velocity
+    # caclulates velocity
+    # pmouse holds the mouse position from the previous frame
+    currentY = mouseY
+    currentX = mouseX
+    velocityX = mouseX - pmouseX
+    velocityY = mouseY - pmouseY
+    fireball = Fireball(velocityX,velocityY,currentX,currentY)
 
         
+def mouseReleased():
+    # when the mouse is released it applied the calculated fireball and allows it to be drawn
+    global fireballs, fireball
+    fireballs.append(fireball)
+    
+
+
+class Fireball():
+    def __init__(self,velocityX,velocityY,originX,originY):
+        self._originX = originX
+        self._originY = originY
+        self._velocityX = velocityX
+        self._velocityY = velocityY
+        
+    def drawBall(self):
+        print("drawing balls")
+        ellipse(self._originX,self._originY,50,50)
+        self.updateBall()
+            
+    def updateBall(self):
+        print("updating balls")
+        self._originX += self._velocityX
+        self._originY += self._velocityY
+
         
 class Particle():
     # a particle is a small shape which has a randomised velocity and can have physics applied to it
